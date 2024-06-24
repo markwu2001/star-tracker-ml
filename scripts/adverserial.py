@@ -13,18 +13,18 @@ def apply_adverserial_false_stars(file_path, sensor_x, sensor_y):
     # Traverse through adverserial datasets and write to csvs
     # Create a new csv for every adverserial case
     for file in os.listdir(file_path):
-
-        for i in range(adverserial_cases): # Create x adverserial datasets for each case
+        
+        for i in range(adverserial_cases): # Create x adverserial datasets for each case 
             # Choose random number of stars to perform false centroid injection
             star_count = random.randint(0, adverserial_stars)
 
-            new_file_path = file_path + "/" + file.append("false_stars_" + star_count)
-            shutil.copy(file_path + "/" + file , new_file_path)
-            csv_file = open(new_file_path + "/" + file, 'w')
+            new_file_path_name = file_path + "/" + file.strip(".csv") + "_case_" + str(i) + "_false_stars_" + str(star_count) + ".csv"
+            shutil.copy(file_path + "/" + file , new_file_path_name)
+            csv_file = open(new_file_path_name, 'a')
             csv_writer = csv.writer(csv_file)
             # If i in range 0 error, then add error handling here. 
-            for i in range(star_count):
-                csv_writer.writerow(f"{random.uniform(0, sensor_x):.14f}", f"{random.uniform(0, sensor_y):.14f}") # Perhaps weight the false stars to the center of the image? Maybe not yet
+            for j in range(star_count): 
+                csv_writer.writerow([f"{random.uniform(0, sensor_x):.14f}", f"{random.uniform(0, sensor_y):.14f}"]) # Perhaps weight the false stars to the center of the image? Maybe not yet
 
             csv_file.close()
     return

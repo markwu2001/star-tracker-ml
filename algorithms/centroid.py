@@ -4,6 +4,8 @@ from photutils.centroids import centroid_sources
 from astropy.stats import sigma_clipped_stats
 from astropy.io import fits
 from photutils.detection import DAOStarFinder
+import os
+import csv
 
 import matplotlib.pyplot as plt
 from astropy.visualization import SqrtStretch
@@ -32,7 +34,7 @@ def centroids_from_img(img):
     return sources
 
 
-def overlay_centroids(img, sources):
+def overlay_centroids(img, sources): # Move this to centroid_test.py when it's time to port files to MCU
     """
     Overlay the centroids on an image
     """
@@ -51,6 +53,8 @@ def overlay_centroids(img, sources):
     plt.show()
     return None
 
+
+    
 
 
 

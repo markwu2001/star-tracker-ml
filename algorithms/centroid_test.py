@@ -17,7 +17,7 @@ def centroid_sources_to_dataset(file_path):
         sources = ct.centroids_from_img(img)
 
         # Initialize empty csv file
-        csv_file = open(file_path + "/centroids/" + file.strip('.png') + '_centroids_no_adverserial.csv', 'w')
+        csv_file = open(file_path + "/centroids/" + file.strip('.png') + '_centroids_no_adverserial.csv', 'w', newline='')
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(['x_centroid', 'y_centroid'])
         # Append centroids to a dataset
@@ -27,11 +27,12 @@ def centroid_sources_to_dataset(file_path):
         csv_file.close()
     return 
 
-# Run code for demo
+# Run code for image demo
+
 # image = Image.open("images_data/mag5_1608_no_adverserial_gray/122001.png") # first star in catalogue
-image = Image.open("images_data/mag5_1608_no_adverserial_gray/11345001.png") # Determined as the star with the lowest amount of centroids around it (106 other stars)
-sources = ct.centroids_from_img(image)
+# image = Image.open("images_data/mag5_1608_no_adverserial_gray/11345001.png") # Determined as the star with the lowest amount of centroids around it (106 other stars)
+# sources = ct.centroids_from_img(image)
 # ct.overlay_centroids(image, sources)
 
-
+# Run code to generate centroid sources
 centroid_sources_to_dataset("images_data/mag5_1608_no_adverserial_gray/") # use this line to create a csv dataset.

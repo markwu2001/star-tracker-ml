@@ -23,7 +23,7 @@ def feature_extraction_binning(centroids, sensor_w, sensor_h, bin_max_radius = 3
 
     # Find most central star, calculate distance from all stars to central star
     polestar = find_closest_center_centroid(centroids, sensor_w, sensor_h)
-    print("Polestar:", polestar , '\n')
+    # print("Polestar:", polestar , '\n')
 
     distances = []
     # Find most central star, calculate distance from all stars to central star
@@ -33,12 +33,12 @@ def feature_extraction_binning(centroids, sensor_w, sensor_h, bin_max_radius = 3
             distances.append(distance)
 
     distances.sort()
-    print("Sorted distances:", distances , '\n')
+    # print("Sorted distances:", distances , '\n')
     # DONE: modify exponential gemoetric relationship. Pure exponential does not work very well. e.g. sample binning: [0, 0, 0, 0, 0, 0, 0, 14, 53, 0]
     # Note that ML doesn't require linear relationships. Can be aribitrary or even piecewise linear
     # Generate bin edges
     bin_edges = [bin_max_radius/bin_count * i for i in range(bin_count)]
-    print("Bin edges:", bin_edges , '\n')
+    # print("Bin edges:", bin_edges , '\n')
     """
     # I just realized non linear bins are just stupid. Set default to linear and comment out this crap
     # Consider adding flag to test non linear binning vs linear binning performance

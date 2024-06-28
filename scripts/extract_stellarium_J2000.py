@@ -29,3 +29,5 @@ print(columns)
 print("Number of entities: ", len(columns))
 
 # Now take columns and write to a new file with stellarium syntax
+
+# TODO:Consider generating random angles (or grid-like angles) and determining what the polestar would be using projection in  order to enrich training data

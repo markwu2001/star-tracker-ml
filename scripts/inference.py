@@ -37,6 +37,8 @@ img = Image.open(image_filepath)
 
 # Calculate centroids for each image
 centroids = ct.centroids_from_img(img)
+centroids = centroids['xcentroid', 'ycentroid']
+print("Centroids: ", centroids)
 
 # Binning Feature Extraction
 bins = bin.feature_extraction_binning(centroids, 752, 480, bin_max_radius, bin_count)

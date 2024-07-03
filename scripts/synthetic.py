@@ -63,15 +63,15 @@ def apply_adverserial_positional_error(file_path, sensor_x, sensor_y, sigma_all_
 # Script Usage
 
 # First create duplicate clean folder for adverserial dataset
-filepath_no_adverserial = "images_data\mag5_1608_no_adverserial_gray\centroids"
-filepath_adverserial = "images_data\mag5_adverserial_centroids"
+# filepath_no_adverserial = "images_data\mag5_1608_no_adverserial_gray\centroids"
+# filepath_adverserial = "images_data\mag5_adverserial_centroids"
 
-if not os.path.exists(filepath_adverserial):
-    os.makedirs(filepath_adverserial)
+# if not os.path.exists(filepath_adverserial):
+#     os.makedirs(filepath_adverserial)
 
-for file in os.listdir(filepath_no_adverserial):
-    shutil.copy(filepath_no_adverserial + "/" + file, filepath_adverserial + "/" + file.replace("_no_adverserial", "_adverserial")) 
+# for file in os.listdir(filepath_no_adverserial):
+#     shutil.copy(filepath_no_adverserial + "/" + file, filepath_adverserial + "/" + file.replace("_no_adverserial", "_adverserial")) 
 
-apply_adverserial_false_stars(filepath_adverserial, 480, 752, 10)
+# apply_adverserial_false_stars(filepath_adverserial, 480, 752, 10)
 
-apply_adverserial_positional_error(filepath_adverserial, 480,752,0.01,0.0001)
+# apply_adverserial_positional_error(filepath_adverserial, 480,752,0.01,0.0001)

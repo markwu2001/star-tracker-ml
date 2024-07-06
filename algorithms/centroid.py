@@ -23,13 +23,13 @@ def centroids_from_img(img):
 
     data = np.array(img)
     # the following is for background noise removal. Implement later and see https://photutils.readthedocs.io/en/stable/detection.html
-    # mean, median, std = sigma_clipped_stats(data, sigma=3.0)  
-    # print((mean, median, std))  
+    mean, median, std = sigma_clipped_stats(data, sigma=3.0)  
+    print((mean, median, std))  
 
-    # daofind = DAOStarFinder(fwhm=3.0, threshold=5.*std)  
-    # sources = daofind(data - median)
-    daofind = DAOStarFinder(fwhm=3.0, threshold=5)  # TODO: Adjust fwhm and threshold later.
-    sources = daofind(data)
+    daofind = DAOStarFinder(fwhm=3.0, threshold=2*std)  # TODO make the threshold a tunable parameter
+    sources = daofind(data - median)
+    # daofind = DAOStarFinder(fwhm=3.0, threshold=5)  # Run this for no background noise removal TODO: Adjust fwhm and threshold later.
+    # sources = daofind(data)
 
     return sources
 
@@ -50,7 +50,7 @@ def overlay_centroids(img, sources): # Move this to centroid_test.py when it's t
     norm = ImageNormalize(stretch=SqrtStretch())
     plt.imshow(data, cmap='Greys', origin='lower', norm=norm, interpolation='nearest')
     apertures.plot(color='blue', lw=1.5, alpha=0.5)
-    plt.show()
+    plt.show() # If this isn't working on WSL2, try isntalling tkinter:  sudo apt-get install python3-tk
     return None
 
 

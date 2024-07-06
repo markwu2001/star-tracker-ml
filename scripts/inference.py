@@ -1,8 +1,10 @@
 # Run inference from a sample image 
 
-image_filepath = "images_data/mag5_1608_no_adverserial_gray/122001.png"
-# image_filepath = "images_data/mag5_1608_no_adverserial_gray/4147001.png"
-model_filepath = "ml/models/star_tracker_model_large.keras"
+# image_filepath = "images_data/mag5_1608_47deg_gray/122001.png"
+# image_filepath = "images_data/mag5_1608_47deg_gray/4463001.png"
+image_filepath = "images_data/dslr_night_images/focused_star_dsc0014_752x502_gray.png" # TODO debug image proessing that's crashing here.
+model_filepath = "ml/models/mag5_1608_47deg.keras"
+
 
 bin_count = 10
 bin_max_radius = 400
@@ -61,7 +63,7 @@ print("Max Prediction: ", np.max(predictions),"\n")
 # TODO: Figure out labels
 
 
-temp_y_label_source = "images_data/mag5_adverserial_bins/mag5_adverserial_bins.csv"
+temp_y_label_source = "images_data/mag5_1608_47deg_gray/bins/mag5_1608_47deg_bin_features.csv"
 # TODO: read the header instead of hardcoding it
 dataframe = pd.read_csv(temp_y_label_source, header=0, names=["HIP", "bin0", "bin1", "bin2", "bin3", "bin4", "bin5", "bin6", "bin7", "bin8", "bin9"])
 dataset = dataframe.values

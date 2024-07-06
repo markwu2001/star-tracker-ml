@@ -36,7 +36,8 @@ SolarSystem.setFlagTrails(false);
 
 
 core.setProjectionMode("ProjectionPerspective");
-StelMovementMgr.zoomTo(42, 1);
+// StelMovementMgr.zoomTo(42, 1); // OpenMV Global Shutter Camera FOV
+StelMovementMgr.zoomTo(46.9, 1); // Nikon D3300 18mm vertical FOV 
 core.wait(1);
 
 LabelMgr.deleteAllLabels();

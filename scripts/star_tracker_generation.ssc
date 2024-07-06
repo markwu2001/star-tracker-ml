@@ -36,7 +36,9 @@ SolarSystem.setFlagTrails(false);
 
 
 core.setProjectionMode("ProjectionPerspective");
-StelMovementMgr.zoomTo(42, 1);
+// StelMovementMgr.zoomTo(42, 1); // OpenMV Global Shutter Camera FOV
+StelMovementMgr.zoomTo(46.9, 1); // Nikon D3300 18mm vertical FOV 
+// StelMovementMgr.zoomTo(76.2, 1); // Nikon D3300 18mm diagonal FOV
 core.wait(1);
 
 LabelMgr.deleteAllLabels();
@@ -58,6 +60,7 @@ for (i=0; i<starlist.length; i++)
 	core.moveToRaDecJ2000(starlist[i][1],starlist[i][2],0);
 	for (j=0; j<360;j++) {
 		// find function to rotate camera
+		// rotate camera with time of night. TODO
 		core.wait(0.1);
 	}
 	// core.wait(0.1);

@@ -2,7 +2,7 @@
 from PIL import Image
 import os
 
-filepath = "images_data/dslr_night_images"
+filepath = "images_data/mag5_1608_47deg"
 
 if (os.path.exists(filepath+"_gray") == False):
     os.mkdir(filepath+"_gray")

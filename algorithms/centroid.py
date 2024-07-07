@@ -23,13 +23,13 @@ def centroids_from_img(img):
 
     data = np.array(img)
     # the following is for background noise removal. Implement later and see https://photutils.readthedocs.io/en/stable/detection.html
-    # mean, median, std = sigma_clipped_stats(data, sigma=3.0)  
-    # print((mean, median, std))  
+    mean, median, std = sigma_clipped_stats(data, sigma=3.0)  
+    print((mean, median, std))  
 
-    # daofind = DAOStarFinder(fwhm=3.0, threshold=2*std)  # TODO make the threshold a tunable parameter
-    # sources = daofind(data - median)
-    daofind = DAOStarFinder(fwhm=3.0, threshold=5)  # Run this for no background noise removal TODO: Adjust fwhm and threshold later.
-    sources = daofind(data)
+    daofind = DAOStarFinder(fwhm=3.0, threshold=2*std)  # TODO make the threshold a tunable parameter
+    sources = daofind(data - median)
+    # daofind = DAOStarFinder(fwhm=3.0, threshold=5)  # Run this for no background noise removal TODO: Adjust fwhm and threshold later.
+    # sources = daofind(data)
 
     return sources
 

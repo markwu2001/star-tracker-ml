@@ -29,6 +29,7 @@ import discorpy.post.postprocessing as post
 # Initial parameters
 file_path = "images_data/calibration_images/D3300_18mm_calibration.JPG"
 output_base = "images_data/calibration_images/corrected/"
+distortion_parameter_output = "camera_model/"
 num_coef = 5  # Number of polynomial coefficients
 mat0 = io.load_image(file_path) # Load image
 (height, width) = mat0.shape
@@ -79,6 +80,8 @@ list_fact = proc.calc_coef_backward(list_hor_lines, list_ver_lines,
                                     xcenter, ycenter, num_coef)
 # Save the results for later use.
 io.save_metadata_txt(output_base + "/coefficients_radial_distortion.txt",
+                     xcenter, ycenter, list_fact)
+io.save_metadata_txt(distortion_parameter_output + "/coefficients_radial_distortion.txt",
                      xcenter, ycenter, list_fact)
 print("X-center: {0}. Y-center: {1}".format(xcenter, ycenter))
 print("Coefficients: {0}".format(list_fact))

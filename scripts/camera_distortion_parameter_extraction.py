@@ -27,7 +27,7 @@ import discorpy.proc.processing as proc
 import discorpy.post.postprocessing as post
 
 # Initial parameters
-file_path = "images_data/calibration_images/D3300_18mm_calibration.JPG"
+file_path = "images_data/calibration_images/D3300_18mm_calibration.png"
 output_base = "images_data/calibration_images/corrected/"
 distortion_parameter_output = "camera_model/"
 num_coef = 5  # Number of polynomial coefficients
@@ -108,5 +108,5 @@ io.save_residual_plot(output_base + "/ver_residual_after_correction.png",
 # Correct the image
 corrected_mat = post.unwarp_image_backward(mat0, xcenter, ycenter, list_fact)
 # Save results. Note that the output is 32-bit numpy array. Convert to lower-bit if need to.
-io.save_image(output_base + "/corrected_image.tif", corrected_mat)
-io.save_image(output_base + "/difference.tif", corrected_mat - mat0)
+io.save_image(output_base + "/corrected_image.png", corrected_mat)
+io.save_image(output_base + "/difference.png", corrected_mat - mat0)

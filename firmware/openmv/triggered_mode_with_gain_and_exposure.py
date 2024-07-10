@@ -19,10 +19,11 @@
 import sensor
 import time
 
-# Change this value to adjust the exposure. Try 10.0/0.1/etc.
-EXPOSURE_TIME_SCALE = 70.0
+# Set the exposure time in us
+EXPOSURE_MICROSECONDS = 800000
 # Change this value to adjust the gain. Try 10.0/0/0.1/etc.
-GAIN_SCALE = 50.0
+GAIN_SCALE = 0.2
+
 
 sensor.reset()  # Reset and initialize the sensor.
 sensor.set_pixformat(sensor.GRAYSCALE)  # Set pixel format to GRAYSCALE
@@ -31,7 +32,7 @@ sensor.set_framesize(sensor.WVGA2)  # Set frame size to largest resolution
 # Print out the initial exposure time for comparison.
 print("Initial exposure == %d" % sensor.get_exposure_us())
 
-sensor.skip_frames(time=2000)  # Wait for settings take effect.
+sensor.skip_frames(time=500)  # Wait for settings take effect.
 clock = time.clock()  # Create a clock object to track the FPS.
 
 # You have to turn automatic exposure control and automatic white balance off
@@ -49,7 +50,7 @@ print("Current Exposure == %d" % current_exposure_time_in_microseconds)
 # disables sensor auto exposure control. The additionally "exposure_us"
 # argument then overrides the auto exposure value after AEC is disabled.
 sensor.set_auto_exposure(
-    False, exposure_us=int(current_exposure_time_in_microseconds * EXPOSURE_TIME_SCALE)
+    False, exposure_us=int(EXPOSURE_MICROSECONDS)
 )
 
 print("New exposure == %d" % sensor.get_exposure_us())
@@ -69,11 +70,25 @@ sensor.set_auto_gain(False, gain_db=current_gain_in_decibels * GAIN_SCALE)
 
 print("New gain == %f db" % sensor.get_gain_db())
 
+# Check what the coarse time is set to to make sure the exposure is actually being updated
+sensor.__write_reg(0x0B, 32766) # Write to this register to just override the coarse exposure time
+sensor.__write_reg(0xD2, 32766)
+
+sensor.__write_reg(0xD5, 2046) # Write to this register to just override the fine exposure time
+sensor.__write_reg(0xD8, 2046)
+#sensor.__write_reg(0x0F, (1 << 0)) # Set camera to HDR Mode Context A
+sensor.__write_reg(0x0F, (1 << 8)) # Set camera to HDR Mode Context B
+print("HDR Status Reg: " , sensor.__read_reg(0x0F))
+print("MT9V0XX_TOTAL_SHUTTER_WIDTH" , sensor.__read_reg(0x0B))
+print("MT9V0X4_TOTAL_SHUTTER_WIDTH_B" , sensor.__read_reg(0xD2))
+print("MT9V0X4_FINE_SHUTTER_WIDTH_TOTAL        " , sensor.__read_reg(0xD5))
+print("MT9V0X4_FINE_SHUTTER_WIDTH_TOTAL_B        " , sensor.__read_reg(0xD8))
 
 sensor.ioctl(sensor.IOCTL_SET_TRIGGERED_MODE, True)
 
 while True:
     clock.tick()  # Update the FPS clock.
     img = sensor.snapshot()  # Take a picture and return the image.
-    print(clock.fps())  # Note: OpenMV Cam runs about half as fast when connected
+    print("FPS: " , clock.fps())  # Note: OpenMV Cam runs about half as fast when connected
+    print("Expose Time + Delay: " , 1/(clock.fps()))
     # to the IDE. The FPS should increase once disconnected.

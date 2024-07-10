@@ -33,6 +33,7 @@ def centroid_sources_to_dataset(file_path):
 
 # image = Image.open("images_data/test_images/noisy_image.jpg") 
 image = Image.open("images_data/dslr_night_images_gray/focused_star_dsc0014_752x502_gray.png") 
+# image = Image.open("images_data/dslr_night_images/distortion_corrected/focused_star_dsc0014_752x502_gray_hip75458.png_corrected_image.png") 
 # image = Image.open("images_data/mag5_1608_no_adverserial_gray/11345001.png") # Determined as the star with the lowest amount of centroids around it (106 other stars)
 sources = ct.centroids_from_img(image)
 ct.overlay_centroids(image, sources)

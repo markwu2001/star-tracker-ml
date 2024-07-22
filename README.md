@@ -1,6 +1,8 @@
 # star-tracker-ml
 Second Attempt at a ML Star Tracker
 
+## Edit: This project has been depreciated. ##
+
 Order to run files for full scale development
 
 1. Stellarium Image Set Generation ✅

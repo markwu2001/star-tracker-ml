@@ -2,6 +2,7 @@
 Second Attempt at a ML Star Tracker
 
 ## Edit: This project has been depreciated. ##
+### After some night sky testing, it was determined that the machine learning approach is very sensitive to the camera model, e.g. frequency-dependence of sensor sensitivity means that red stars of lower magnitudes are visible - causing predictable counts of false stars. Another star tracking project is being developed that utilizes [the lost algorithm](https://github.com/UWCubeSat/lost) ###
 
 Order to run files for full scale development
 
